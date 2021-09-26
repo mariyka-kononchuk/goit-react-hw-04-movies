@@ -17,3 +17,6 @@ export function fetchMovieDetails(movieId) {
     return fetchMovies(`${BASE_URL}movie/${movieId}?api_key=${API_KEY}&language=en-US`)
 }
 
+export function fetchMovieSearch(searchName) {
+    return fetchMovies(`${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&page=1&include_adult=false&query=${searchName}`)
+}
