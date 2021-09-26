@@ -23,15 +23,15 @@ export default function MoviesView() {
     fetchMovieSearch(searchName)
         .then((data) => {
             console.log(data);
-        // if (data.hits.length === 0) {
-        //   return toast('Alas, no items found per your query', {
-        //     style: {
-        //       borderRadius: '10px',
-        //       background: '#333',
-        //       color: '#fff',
-        //     },
-        //   });
-        // }
+        if (data.results.length === 0) {
+          return toast('Alas, no items found per your query', {
+            style: {
+              borderRadius: '10px',
+              background: '#333',
+              color: '#fff',
+            },
+          });
+        }
         let newMovies = [...movies, ...data.results];
         setMovies(newMovies);
         setStatus('resolved');
@@ -43,13 +43,42 @@ export default function MoviesView() {
         // setSpinner(false);
       });
 
-  }, [searchName])
+    }, [searchName])
 
-    return (
-        <div>
+    if (status === 'idle') {
+        return (
+            <div>
+                <Searchbar onSubmit={handleSearchSubmit} />
+                <Toaster/>
+            </div>)
+    }
+    
+    if (status === 'rejected') {
+        console.log('nothing')
+        return toast('Извините, по вашему запросу ничего не найдено', {
+            style: {
+                borderRadius: '10px',
+                background: '#333',
+                color: '#fff',
+            },
+        });
+    }
+    
+    if (status === 'resolved') {
+        return (
+           <div>
             <Searchbar onSubmit={handleSearchSubmit} />
             <MoviesPage movies={movies} status={status }/>
             <Toaster/>
         </div>
-    )
+        )
+    }
+
+    // return (
+    //     <div>
+    //         <Searchbar onSubmit={handleSearchSubmit} />
+    //         <MoviesPage movies={movies} status={status }/>
+    //         <Toaster/>
+    //     </div>
+    // )
 }

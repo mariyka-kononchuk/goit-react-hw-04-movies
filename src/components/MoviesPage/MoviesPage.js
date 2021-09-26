@@ -7,23 +7,23 @@ import PropTypes from 'prop-types';
 
 
 
-export default function MoviesPage({ movies, status}) {
-    if (status === 'idle') {
-        return <div></div>
-    }
+export default function MoviesPage({ movies}) {
+    // if (status === 'idle') {
+    //     return <div></div>
+    // }
     
-    if (status === 'rejected') {
-        console.log('nothing')
-        return toast('Извините, по вашему запросу ничего не найдено', {
-            style: {
-                borderRadius: '10px',
-                background: '#333',
-                color: '#fff',
-            },
-        });
-    }
+    // if (status === 'rejected') {
+    //     console.log('nothing')
+    //     return toast('Извините, по вашему запросу ничего не найдено', {
+    //         style: {
+    //             borderRadius: '10px',
+    //             background: '#333',
+    //             color: '#fff',
+    //         },
+    //     });
+    // }
     
-    if (status === 'resolved') {
+    // if (status === 'resolved') {
         return (
             <div>
                 <ul>
@@ -34,7 +34,7 @@ export default function MoviesPage({ movies, status}) {
             </div> 
         )
     }
-}
+
 
 // MoviesPage.propTypes = {
 //     src: PropTypes.string.isRequired,
