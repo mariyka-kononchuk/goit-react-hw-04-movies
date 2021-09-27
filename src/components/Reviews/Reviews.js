@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import {fetchMovieReviews} from '../../services/movies-api'
 
-export default function Cast() {
+export default function Reviews() {
     const { movieId } = useParams();
     const [reviews, setReviews] = useState(null);
     const [status, setStatus] = useState('idle');
@@ -11,8 +11,8 @@ export default function Cast() {
     useEffect(() => {
         fetchMovieReviews(movieId)
             .then((data) => {
-                console.log(data)
-                setReviews(data)
+                console.log(data.results)
+                setReviews(data.results)
                 setStatus('resolved');
             }
                
@@ -33,10 +33,10 @@ export default function Cast() {
             <div>
                 <ul>
                     {reviews.map(review => (
-                        <li key={review.cast_id}>
+                        <li key={review.id}>
                             
-                            <p>{review.name}</p>
-                            <p>{review.character}</p>
+                            <p>{review.author}</p>
+                            <p>{review.content}</p>
                         </li>
                     ))}
                 </ul>

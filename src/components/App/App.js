@@ -23,17 +23,9 @@ export default function App() {
                     <MoviesView />
                 </Route>
 
-                <Route path="/movies/:movieId" exact>
+                <Route path="/movies/:movieId" >
                     <MovieDetailsPage />
                 </Route>
-
-                 {/* <Route path="/movies/:movieId/cast" >
-                    <Cast />
-                </Route> */}
-
-                {/* <Route path="/movies/:movieId/reviews">
-                    <Reviews/>
-                </Route> */}
 
                 <Route>
                     <NotFoundView />

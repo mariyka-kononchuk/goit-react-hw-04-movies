@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 //import { List } from './ImageGallery.styled.jsx'
 
 export default function MoviesList({ movies }) {
-  // const {url} = useRouteMatch();
+  //const {url} = useRouteMatch();
         return (
             <div>
                 <ul>

@@ -1,15 +1,14 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useParams, NavLink, Route, useRouteMatch } from 'react-router-dom';
-import { Switch } from 'react-router-dom';
-import { BrowserRouter } from 'react-router-dom'
+import { useParams, NavLink, useRouteMatch, Route } from 'react-router-dom';
+
 import { fetchMovieDetails } from '../../services/movies-api'
 import Cast from '../Cast';
+import Reviews from '../Reviews';
 
 
 export default function MovieDetailsPage() {
-    const match = useRouteMatch;
-    console.log(match);
+   // const {url} = useRouteMatch;
     const { movieId } = useParams();
     const [movie, setMovie] = useState(null);
     const [status, setStatus] = useState('idle');
@@ -34,10 +33,10 @@ export default function MovieDetailsPage() {
     }
     
     if (status === 'resolved') {
-        console.log(match);
+      
         return (
-            
             <div>
+                <NavLink to="/movies">Go back</NavLink>
                 <h2>{movie.title}</h2>
                 <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.name} />
                 <p>User score: {movie.vote_average}</p>
@@ -51,23 +50,20 @@ export default function MovieDetailsPage() {
                         </li>
                     ))}
                 </ul>
+
                 <h3>Additional information</h3>
-                <NavLink to="">Cast</NavLink>
-                <NavLink to="">Reviews</NavLink>
-                    
-             
-                        
-                    {/* <Route path="/movies/:movieId/cast" exact>
-                        <Cast />
-                    </Route>
+
+                <NavLink to={`/movies/${movieId}/cast`}>Cast</NavLink>
+                <NavLink to={`/movies/${movieId}/reviews`}>Reviews</NavLink>
+                     
+                <Route path="/movies/:movieId/cast" exact>
+                    <Cast />
+                </Route>
                             
-                    <Route path="/movies/:movieId/reviews" >
-                        <Cast />
-                    </Route> */}
-                        
-            
+                <Route path="/movies/:movieId/reviews" >
+                    <Reviews />
+                </Route>
             </div>
-            
         )
     }
 }
