@@ -32,7 +32,7 @@ export default function MoviesPage() {
             },
           });
         }
-        let newMovies = [...movies, ...data.results];
+        const newMovies = [...movies, ...data.results];
         setMovies(newMovies);
         setStatus('resolved');
         // setSpinner(false);
@@ -54,14 +54,18 @@ export default function MoviesPage() {
     }
     
     if (status === 'rejected') {
-        console.log('nothing')
-        return toast('Извините, по вашему запросу ничего не найдено', {
+        toast('Извините, по вашему запросу ничего не найдено', {
             style: {
                 borderRadius: '10px',
                 background: '#333',
                 color: '#fff',
             },
         });
+        return (
+            <div>
+                <Searchbar onSubmit={handleSearchSubmit} />
+                <Toaster/>
+            </div>)
     }
     
     if (status === 'resolved') {
@@ -73,12 +77,4 @@ export default function MoviesPage() {
         </div>
         )
     }
-
-    // return (
-    //     <div>
-    //         <Searchbar onSubmit={handleSearchSubmit} />
-    //         <MoviesPage movies={movies} status={status }/>
-    //         <Toaster/>
-    //     </div>
-    // )
 }

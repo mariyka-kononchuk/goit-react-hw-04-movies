@@ -20,3 +20,11 @@ export function fetchMovieDetails(movieId) {
 export function fetchMovieSearch(searchName) {
     return fetchMovies(`${BASE_URL}search/movie?api_key=${API_KEY}&language=en-US&page=1&include_adult=false&query=${searchName}`)
 }
+
+export function fetchMovieCast(movieId) {
+    return fetchMovies(`${BASE_URL}movie/${movieId}/credits?api_key=${API_KEY}>&language=en-US`)
+}
+
+export function fetchMovieReviews(movieId) {
+    return fetchMovies(`${BASE_URL}movie/${movieId}/reviews?api_key=${API_KEY}&language=en-US&page=1`)
+}
