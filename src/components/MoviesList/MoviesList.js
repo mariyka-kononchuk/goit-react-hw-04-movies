@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 //import { List } from './ImageGallery.styled.jsx'
 
 export default function MoviesList({ movies }) {
-   // const {url} = useRouteMatch();
+  // const {url} = useRouteMatch();
         return (
             <div>
                 <ul>
@@ -23,4 +23,3 @@ export default function MoviesList({ movies }) {
 MoviesList.propTypes = {
     movies: PropTypes.array.isRequired,
 };
-

@@ -5,6 +5,8 @@ import Container from '../Container';
 import HomeView from '../../views/HomeView';
 import MoviesView from '../../views/MoviesView';
 import MovieDetailsPage from '../../components/MovieDetailsPage';
+import Cast from '../Cast';
+import Reviews from '../Reviews'
 import NotFoundView from '../../views/NotFoundView';
 
 export default function App() {
@@ -21,9 +23,17 @@ export default function App() {
                     <MoviesView />
                 </Route>
 
-                <Route path="/movies/:movieId">
+                <Route path="/movies/:movieId" exact>
                     <MovieDetailsPage />
                 </Route>
+
+                 {/* <Route path="/movies/:movieId/cast" >
+                    <Cast />
+                </Route> */}
+
+                {/* <Route path="/movies/:movieId/reviews">
+                    <Reviews/>
+                </Route> */}
 
                 <Route>
                     <NotFoundView />
