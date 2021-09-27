@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useParams, NavLink, useRouteMatch, Route } from 'react-router-dom';
+import { useParams, NavLink, Link, useRouteMatch, Route } from 'react-router-dom';
 
 import { fetchMovieDetails } from '../../services/movies-api'
 import Cast from '../Cast';
@@ -8,7 +8,8 @@ import Reviews from '../Reviews';
 
 
 export default function MovieDetailsPage() {
-   // const {url} = useRouteMatch;
+    const { url } = useRouteMatch();
+    console.log(url);
     const { movieId } = useParams();
     const [movie, setMovie] = useState(null);
     const [status, setStatus] = useState('idle');
@@ -36,7 +37,7 @@ export default function MovieDetailsPage() {
       
         return (
             <div>
-                <NavLink to="/movies">Go back</NavLink>
+                <Link to="/movies">Go back</Link>
                 <h2>{movie.title}</h2>
                 <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.name} />
                 <p>User score: {movie.vote_average}</p>
@@ -53,8 +54,8 @@ export default function MovieDetailsPage() {
 
                 <h3>Additional information</h3>
 
-                <NavLink to={`/movies/${movieId}/cast`}>Cast</NavLink>
-                <NavLink to={`/movies/${movieId}/reviews`}>Reviews</NavLink>
+                <NavLink to={`${url}/cast`}>Cast</NavLink>
+                <NavLink to={`${url}/reviews`}>Reviews</NavLink>
                      
                 <Route path="/movies/:movieId/cast" exact>
                     <Cast />
