@@ -38,9 +38,13 @@ export default function MovieDetailsPage() {
         if (location.state.from === '/') {
             history.push(location.state.from)
         } else {
-            history.push('/movies');
+           history.push('/movies');
             const query = location.state.query;
             localStorage.setItem('query', JSON.stringify(query));
+            // history.push({
+            // path: '/movies',
+            // search: `query=${query}`
+        // });
            // onSubmit(location.state.query);
         }
         //console.log("location2", location);

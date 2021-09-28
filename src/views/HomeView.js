@@ -5,7 +5,9 @@ import MoviesList from '../components/MoviesList';
 export default function HomeView() {
     const [movies, setMovies] = useState([]);
 
-  useEffect(() => {
+    useEffect(() => {
+        localStorage.setItem('query', '');
+     
       fetchPopularMovies()
           .then((data) => {
               console.log(data);

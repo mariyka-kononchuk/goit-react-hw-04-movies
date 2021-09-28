@@ -9,21 +9,23 @@ import { Toaster } from 'react-hot-toast';
 export default function MoviesPage() {
   // const location = useLocation();
   // console.log(location.state);
-  const searchWord= localStorage.getItem('query');
+  const searchWord = localStorage.getItem('query');
+  //console.log (searchWord)
     const [searchName, setSearchName] = useState(searchWord ? searchWord : '');
     const [movies, setMovies] = useState([]);
     const [status, setStatus] = useState('idle');
 
     const handleSearchSubmit = (searchName) => {
         setSearchName(searchName);
-        //setMovies([]);
+        setMovies([]);
     }
     
     useEffect(() => {
-    if (!searchName) {
+      if (!searchName) {
+      console.log("no searchName")
       return
         }
-        
+        console.log("searchName", searchName)
     fetchMovieSearch(searchName)
         .then((data) => {
             console.log(data);
