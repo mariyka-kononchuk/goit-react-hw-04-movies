@@ -28,7 +28,7 @@ export default function Searchbar({ onSubmit }) {
         onSubmit(searchName);
         history.push({
             ...location,
-            search: `&query=${searchName}`
+            search: `query=${searchName}`
         });
         setSearchName('')
     }

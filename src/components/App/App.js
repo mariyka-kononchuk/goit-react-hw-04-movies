@@ -4,9 +4,7 @@ import Navigation from '../Navigation';
 import Container from '../Container';
 import HomeView from '../../views/HomeView';
 import MoviesView from '../../views/MoviesView';
-import MovieDetailsPage from '../../components/MovieDetailsPage';
-import Cast from '../Cast';
-import Reviews from '../Reviews'
+import MovieDetailsView from '../../views/MovieDetailsView';
 import NotFoundView from '../../views/NotFoundView';
 
 export default function App() {
@@ -24,7 +22,7 @@ export default function App() {
                 </Route>
 
                 <Route path="/movies/:movieId" >
-                    <MovieDetailsPage />
+                    <MovieDetailsView />
                 </Route>
 
                 <Route>

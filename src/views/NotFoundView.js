@@ -1,4 +1,10 @@
 import React from 'react';
+import { useHistory} from 'react-router-dom';
+import HomeView from './HomeView';
+
 export default function NotFoundView() {
-    return <h1>404 Page not found</h1>
+    const history = useHistory();
+    history.push('/');
+    
+    return <HomeView />
 };

@@ -1,4 +1,5 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+import {useLocation} from 'react-router-dom';
 import MoviesList from '../MoviesList';
 import Searchbar from '../SearchBar';
 import { fetchMovieSearch } from '../../services/movies-api'
@@ -6,7 +7,10 @@ import toast from 'react-hot-toast';
 import { Toaster } from 'react-hot-toast';
 
 export default function MoviesPage() {
-    const [searchName, setSearchName] = useState('');
+  // const location = useLocation();
+  // console.log(location.state);
+  const searchWord= localStorage.getItem('query');
+    const [searchName, setSearchName] = useState(searchWord ? searchWord : '');
     const [movies, setMovies] = useState([]);
     const [status, setStatus] = useState('idle');
 
@@ -72,7 +76,7 @@ export default function MoviesPage() {
         return (
            <div>
             <Searchbar onSubmit={handleSearchSubmit} />
-            <MoviesList movies={movies}/>
+            <MoviesList movies={movies} query={ searchName} />
             <Toaster/>
         </div>
         )
