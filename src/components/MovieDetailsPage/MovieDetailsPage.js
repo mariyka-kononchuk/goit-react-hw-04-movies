@@ -8,8 +8,9 @@ import Reviews from '../Reviews';
 
 
 export default function MovieDetailsPage() {
-    const { url } = useRouteMatch();
-    console.log(url);
+    const { url, path } = useRouteMatch();
+    console.log("url", url);
+    console.log("path", path);
     const { movieId } = useParams();
     const [movie, setMovie] = useState(null);
     const [status, setStatus] = useState('idle');
@@ -37,7 +38,7 @@ export default function MovieDetailsPage() {
       
         return (
             <div>
-                <Link to="/movies">Go back</Link>
+                <Link to={`${url}`}>Go back</Link>
                 <h2>{movie.title}</h2>
                 <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.name} />
                 <p>User score: {movie.vote_average}</p>
@@ -57,11 +58,11 @@ export default function MovieDetailsPage() {
                 <NavLink to={`${url}/cast`}>Cast</NavLink>
                 <NavLink to={`${url}/reviews`}>Reviews</NavLink>
                      
-                <Route path="/movies/:movieId/cast" exact>
+                <Route path={`${path}/cast`} exact>
                     <Cast />
                 </Route>
                             
-                <Route path="/movies/:movieId/reviews" >
+                <Route path={`${path}/reviews`} >
                     <Reviews />
                 </Route>
             </div>

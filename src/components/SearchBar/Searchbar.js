@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import toast from 'react-hot-toast';
 import { Header, SearchForm, SearchFormButton, Label, Input } from './Searchbar.styled'
@@ -6,7 +7,9 @@ import { Header, SearchForm, SearchFormButton, Label, Input } from './Searchbar.
 export default function Searchbar({ onSubmit }) {
     
     const [searchName, setSearchName] = useState('');
-    
+    const history = useHistory();
+    const location = useLocation();
+
     const handleNameChange = e => {
         setSearchName(e.currentTarget.value.toLowerCase())
     }
@@ -23,6 +26,10 @@ export default function Searchbar({ onSubmit }) {
             });
         }
         onSubmit(searchName);
+        history.push({
+            ...location,
+            search: `&query=${searchName}`
+        });
         setSearchName('')
     }
 
