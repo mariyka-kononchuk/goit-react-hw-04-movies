@@ -31,9 +31,7 @@ export default function Searchbar({ onSubmit }) {
             search: `query=${searchName}`
         });
         localStorage.setItem('query', '');
-        
         setSearchName('');
-        
     }
 
         return (

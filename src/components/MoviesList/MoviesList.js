@@ -11,7 +11,6 @@ export default function MoviesList({ movies, query }) {
                 <List>
                     {movies.map(movie => (
                         <Item key={movie.id}>
-                            
                             <StyledLink
                                 to={{
                                     pathname: `movies/${movie.id}`,

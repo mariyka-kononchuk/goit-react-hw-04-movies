@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import 'react-toastify/dist/ReactToastify.css';
 import { fetchMovieReviews } from '../../services/movies-api';
 import { List, Item, Author, Content} from './Reviews.styled.jsx'
 
@@ -12,11 +14,14 @@ export default function Reviews() {
     useEffect(() => {
         fetchMovieReviews(movieId)
             .then((data) => {
-                console.log(data.results)
+                console.log("array",data.results)
+                if (data.results.length === 0) {
+                   setStatus('no'); 
+                }
+                
                 setReviews(data.results)
                 setStatus('resolved');
             }
-               
         )
         .catch(error => {
             console.log("error");
@@ -27,6 +32,9 @@ export default function Reviews() {
 
     if (status === 'idle') {
         return (<div></div>)
+    }
+    if (status === 'no') {
+        return (<div>No reviews found</div>)
     }
     
     if (status === 'resolved') {
