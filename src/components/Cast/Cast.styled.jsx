@@ -1,7 +1,5 @@
 import styled from '@emotion/styled'
 
-
-
   export const List = styled.ul`
     margin:0;
     margin-top:10px;
@@ -9,7 +7,7 @@ import styled from '@emotion/styled'
     display: grid;
     width: 1000px;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-auto-rows: 200px;
+    grid-auto-rows: 210px;
     grid-gap: 12px; 
     padding: 0;
     list-style: none;  

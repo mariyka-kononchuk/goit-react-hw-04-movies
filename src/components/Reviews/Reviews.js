@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import {fetchMovieReviews} from '../../services/movies-api'
+import { fetchMovieReviews } from '../../services/movies-api';
+import { List, Item, Author, Content} from './Reviews.styled.jsx'
 
 export default function Reviews() {
     const { movieId } = useParams();
@@ -31,15 +32,15 @@ export default function Reviews() {
     if (status === 'resolved') {
         return (
             <div>
-                <ul>
+                <List>
                     {reviews.map(review => (
-                        <li key={review.id}>
+                        <Item key={review.id}>
                             
-                            <p>{review.author}</p>
-                            <p>{review.content}</p>
-                        </li>
+                            <Author>{review.author}</Author>
+                            <Content>{review.content}</Content>
+                        </Item>
                     ))}
-                </ul>
+                </List>
             </div>
         )
     }
