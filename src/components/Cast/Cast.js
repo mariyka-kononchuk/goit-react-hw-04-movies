@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { fetchMovieCast } from '../../services/movies-api';
 import { List, Image, Name, Character, CharacterStyle} from './Cast.styled.jsx'
 
@@ -16,17 +17,19 @@ export default function Cast() {
                 setActors(data.cast)
                 setStatus('resolved');
             }
-               
         )
         .catch(error => {
-            console.log("error");
-           
+            setStatus('rejected');  
       });
         
     }, [movieId]);
 
     if (status === 'idle') {
         return (<div></div>)
+    }
+
+    if (status === 'rejected') {
+        return (<div>Error</div>)
     }
     
     if (status === 'resolved') {
@@ -45,3 +48,7 @@ export default function Cast() {
         )
     }
 }
+
+Cast.propTypes = {
+    movieId: PropTypes.number.isRequired,
+};

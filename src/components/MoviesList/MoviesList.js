@@ -5,7 +5,6 @@ import { List, Item, Image, StyledLink } from './MoviesList.styled.jsx'
 
 export default function MoviesList({ movies, query }) {
     const match = useRouteMatch();
-    console.log("match", match.path)
         return (
             <div>
                 <List>
@@ -22,7 +21,7 @@ export default function MoviesList({ movies, query }) {
                                 {movie.poster_path ?
                                     <Image src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.name} /> :
                                     <Image src="https://i.ibb.co/s9cXZV0/poster.jpg" alt={movie.name} />}
-                                {movie.title}
+                                {movie.title ? movie.title : movie.name}
                             </StyledLink>
                         </Item>
                     ))}
@@ -33,4 +32,5 @@ export default function MoviesList({ movies, query }) {
 
 MoviesList.propTypes = {
     movies: PropTypes.array.isRequired,
+    query: PropTypes.string,
 };

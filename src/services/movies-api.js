@@ -10,7 +10,7 @@ async function fetchMovies(url = '', config = {}) {
 }
 
 export function fetchPopularMovies() {
-    return fetchMovies(`${BASE_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`)
+    return fetchMovies(`${BASE_URL}trending/all/day?api_key=${API_KEY}`)
 }
 
 export function fetchMovieDetails(movieId) {

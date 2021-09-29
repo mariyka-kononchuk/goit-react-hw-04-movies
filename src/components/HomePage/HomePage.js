@@ -1,21 +1,25 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect} from 'react';
+import { fetchPopularMovies } from '../../services/movies-api'
+import MoviesList from '../../components/MoviesList';
+import { Title} from './HomePage.styled.jsx'
 
-const HomePage = () => (
+export default function HomePage() {
+    const [movies, setMovies] = useState([]);
+
+    useEffect(() => {
+        localStorage.setItem('query', '');
+        fetchPopularMovies()
+            .then((data) => {
+                setMovies(data.results);
+            })
+            .catch(error => {
+            });
+    }, [])
+
+    return (
         <div>
-            <h1>Trending today</h1>
-            {/* <Item onClick={() => onClick({ largeImage })}  >
-                <ItemImage src={src} alt={alt} />
-            </Item> */}
+            <Title>Trending today</Title>
+            <MoviesList movies={movies} />
         </div>
-    
-)
-
-// HomePage.propTypes = {
-//     src: PropTypes.string.isRequired,
-//     alt: PropTypes.string.isRequired,
-//     largeImage: PropTypes.string,
-//     onClick:PropTypes.func.isRequired
-// };
-
-export default HomePage;
+    )
+}

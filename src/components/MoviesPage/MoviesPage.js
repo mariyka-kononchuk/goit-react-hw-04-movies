@@ -1,35 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import {useLocation} from 'react-router-dom';
-import MoviesList from '../MoviesList';
-import Searchbar from '../SearchBar';
-import { fetchMovieSearch } from '../../services/movies-api'
 import toast from 'react-hot-toast';
 import { Toaster } from 'react-hot-toast';
+import PropTypes from 'prop-types';
+
+import MoviesList from '../MoviesList';
+import Searchbar from '../SearchBar';
+import SpinnerLoader from '../Loader';
+import { fetchMovieSearch } from '../../services/movies-api'
 
 export default function MoviesPage() {
-  // const location = useLocation();
-  // console.log(location.state);
   const searchWord = localStorage.getItem('query');
-  //console.log (searchWord)
-    const [searchName, setSearchName] = useState(searchWord ? searchWord : '');
-    const [movies, setMovies] = useState([]);
-    const [status, setStatus] = useState('idle');
+  const [searchName, setSearchName] = useState(searchWord ? searchWord : '');
+  const [movies, setMovies] = useState([]);
+  const [status, setStatus] = useState('idle');
+  const [spinner, setSpinner] = useState(false);
 
-    const handleSearchSubmit = (searchName) => {
-        setSearchName(searchName);
-        setMovies([]);
-    }
+  const handleSearchSubmit = (searchName) => {
+      setSearchName(searchName);
+      setMovies([]);
+      setSpinner(true);
+  }
     
     useEffect(() => {
       if (!searchName) {
-      console.log("no searchName")
       return
         }
-        console.log("searchName", searchName)
     fetchMovieSearch(searchName)
         .then((data) => {
-            console.log(data);
-        if (data.results.length === 0) {
+          if (data.results.length === 0) {
+          setSpinner(false);
           return toast('Alas, no items found per your query', {
             style: {
               borderRadius: '10px',
@@ -41,12 +40,11 @@ export default function MoviesPage() {
         const newMovies = [...movies, ...data.results];
         setMovies(newMovies);
         setStatus('resolved');
-        // setSpinner(false);
-        
+        setSpinner(false);
       })
       .catch(error => {
         setStatus('rejected');
-        // setSpinner(false);
+        setSpinner(false);
       });
 
     }, [searchName])
@@ -78,9 +76,14 @@ export default function MoviesPage() {
         return (
            <div>
             <Searchbar onSubmit={handleSearchSubmit} />
-            <MoviesList movies={movies} query={ searchName} />
-            <Toaster/>
+            <MoviesList movies={movies} query={searchName} />
+            <Toaster />
+            {spinner && <SpinnerLoader />}
         </div>
         )
     }
 }
+
+MoviesPage.propTypes = {
+    searchName: PropTypes.string,
+};

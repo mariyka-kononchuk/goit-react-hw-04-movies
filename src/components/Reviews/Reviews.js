@@ -1,8 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import toast from 'react-hot-toast';
-import 'react-toastify/dist/ReactToastify.css';
+import PropTypes from 'prop-types';
 import { fetchMovieReviews } from '../../services/movies-api';
 import { List, Item, Author, Content, NoReviews} from './Reviews.styled.jsx'
 
@@ -20,14 +19,11 @@ export default function Reviews() {
                 } else {
                     setReviews(data.results)
                     setStatus('resolved');
-                }
-                
-                
+                } 
             }
         )
         .catch(error => {
-            console.log("error");
-           
+            setStatus('rejected');
       });
         
     }, [movieId]);
@@ -55,3 +51,7 @@ export default function Reviews() {
         )
     }
 }
+
+Reviews.propTypes = {
+    movieId: PropTypes.number.isRequired,
+};

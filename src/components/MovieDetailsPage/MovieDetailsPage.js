@@ -8,6 +8,7 @@ import {
     useLocation
 } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import PropTypes from 'prop-types';
 
 import { fetchMovieDetails } from '../../services/movies-api'
 import Cast from '../Cast';
@@ -61,7 +62,7 @@ export default function MovieDetailsPage() {
             }
         )
         .catch(error => {
-            console.log("error");
+            setStatus('rejected');
       });
         
     }, [movieId]);
@@ -76,14 +77,12 @@ export default function MovieDetailsPage() {
         return userScorePercentage;
     }
 
-    // const sourceImage = () => {
-    //     const urlImage = movie.poster_path;
-    //     console.log("urlImage",urlImage);
-    //     return urlImage;
-    // }
-
     if (status === 'idle') {
         return (<div></div>)
+    }
+
+    if (status === 'rejected') {
+        return (<div>Error</div>)
     }
     
     if (status === 'resolved') {
@@ -98,7 +97,7 @@ export default function MovieDetailsPage() {
                         <Image src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.name} /> :
                         <Image src="https://i.ibb.co/s9cXZV0/poster.jpg" alt={movie.name} />}
                     <div>
-                        <MovieName>{movie.title} ({releaseYear()})</MovieName>
+                        <MovieName>{movie.title ? movie.title : movie.name} ({releaseYear()})</MovieName>
                         <Score>User score: {userScore()}%</Score>
                         <OverviewTitle>Overview</OverviewTitle>
                         <Overview>{movie.overview}</Overview>
@@ -134,8 +133,12 @@ export default function MovieDetailsPage() {
                 <Route path={`${path}/reviews`} >
                     <Reviews />
                 </Route>
-                  <Toaster/>
+                <Toaster />
             </div>
         )
     }
 }
+
+MovieDetailsPage.propTypes = {
+    movieId: PropTypes.number.isRequired,
+};

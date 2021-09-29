@@ -1,5 +1,4 @@
 import React from 'react';
-// import { NavLink } from 'react-router-dom'
 import { StyledNavLink, StyledNav } from './Navigation.styled.jsx'
 
 const Navigation = () => (
