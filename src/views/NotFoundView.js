@@ -5,6 +5,5 @@ import HomeView from './HomeView';
 export default function NotFoundView() {
     const history = useHistory();
     history.push('/');
-    
     return <HomeView />
 };
