@@ -39,7 +39,7 @@ export default function MovieDetailsPage() {
     const [status, setStatus] = useState('idle');
 
     const handleGoBack = () => {
-        //checking up what page there is a comeback from
+        //checking what page the comeback is from
         if (location.state.from === '/') {
             history.push(location.state.from)
         } else {

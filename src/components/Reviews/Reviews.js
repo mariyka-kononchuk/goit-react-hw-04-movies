@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import 'react-toastify/dist/ReactToastify.css';
 import { fetchMovieReviews } from '../../services/movies-api';
-import { List, Item, Author, Content} from './Reviews.styled.jsx'
+import { List, Item, Author, Content, NoReviews} from './Reviews.styled.jsx'
 
 export default function Reviews() {
     const { movieId } = useParams();
@@ -16,11 +16,13 @@ export default function Reviews() {
             .then((data) => {
                 console.log("array",data.results)
                 if (data.results.length === 0) {
-                   setStatus('no'); 
+                   setStatus('rejected'); 
+                } else {
+                    setReviews(data.results)
+                    setStatus('resolved');
                 }
                 
-                setReviews(data.results)
-                setStatus('resolved');
+                
             }
         )
         .catch(error => {
@@ -33,8 +35,8 @@ export default function Reviews() {
     if (status === 'idle') {
         return (<div></div>)
     }
-    if (status === 'no') {
-        return (<div>No reviews found</div>)
+    if (status === 'rejected') {
+        return (<NoReviews>We don't have any reviews for this movie.</NoReviews>)
     }
     
     if (status === 'resolved') {

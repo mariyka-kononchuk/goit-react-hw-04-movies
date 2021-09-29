@@ -32,4 +32,13 @@ export const Author = styled.p`
     color: #504c4c;
   `
 
+  export const NoReviews = styled.div`
+    margin-top: 5px;
+
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.175;
+    color: #504c4c;
+  `
+
   
