@@ -21,7 +21,7 @@ export default function MoviesList({ movies, query }) {
                                 {movie.poster_path ?
                                     <Image src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.name} /> :
                                     <Image src="https://i.ibb.co/s9cXZV0/poster.jpg" alt={movie.name} />}
-                                {movie.title ? movie.title : movie.name}
+                                {movie.title ? movie.title: movie.name}
                             </StyledLink>
                         </Item>
                     ))}
