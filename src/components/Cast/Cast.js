@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import {fetchMovieCast } from '../../services/movies-api'
+import { fetchMovieCast } from '../../services/movies-api';
+import { List, Image, Name, Character, CharacterStyle} from './Cast.styled.jsx'
 
 export default function Cast() {
     const { movieId } = useParams();
@@ -31,15 +32,15 @@ export default function Cast() {
     if (status === 'resolved') {
         return (
             <div>
-                <ul>
+                <List>
                     {actors.map(actor => (
                         <li key={actor.cast_id}>
-                            <img src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`} alt={actor.name}/>
-                            <p>{actor.name}</p>
-                            <p>{actor.character}</p>
+                            <Image src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`} alt={actor.name}/>
+                            <Name>{actor.name}</Name>
+                            <Character><CharacterStyle>Character:</CharacterStyle> {actor.character}</Character>
                         </li>
                     ))}
-                </ul>
+                </List>
             </div>
         )
     }
