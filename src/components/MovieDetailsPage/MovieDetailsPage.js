@@ -76,6 +76,12 @@ export default function MovieDetailsPage() {
         return userScorePercentage;
     }
 
+    // const sourceImage = () => {
+    //     const urlImage = movie.poster_path;
+    //     console.log("urlImage",urlImage);
+    //     return urlImage;
+    // }
+
     if (status === 'idle') {
         return (<div></div>)
     }
@@ -88,7 +94,9 @@ export default function MovieDetailsPage() {
                 <GoBackButton onClick={handleGoBack}>Go back</GoBackButton>
                 
                 <DetailsWrapper>
-                    <Image src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.name} />
+                    {movie.poster_path ?
+                        <Image src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.name} /> :
+                        <Image src="https://i.ibb.co/s9cXZV0/poster.jpg" alt={movie.name} />}
                     <div>
                         <MovieName>{movie.title} ({releaseYear()})</MovieName>
                         <Score>User score: {userScore()}%</Score>

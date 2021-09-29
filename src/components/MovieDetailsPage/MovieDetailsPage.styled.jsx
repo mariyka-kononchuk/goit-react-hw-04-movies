@@ -76,7 +76,8 @@ export const Image = styled.img`
     margin-bottom:6px;
     margin-right: 20px;
     width: 220px;
-`
+  `
+  
 export const InfoTitle = styled.h3`
     margin-top: 5px;
     margin-bottom: 5px;
