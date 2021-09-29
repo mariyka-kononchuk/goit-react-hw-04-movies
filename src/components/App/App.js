@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Navigation from '../Navigation';
 import Container from '../Container';
-import HomeView from '../../views/HomeView';
+import HomeView from '../../views/HomeView/HomeView';
 import MoviesView from '../../views/MoviesView';
 import MovieDetailsView from '../../views/MovieDetailsView';
 import NotFoundView from '../../views/NotFoundView';

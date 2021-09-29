@@ -14,6 +14,8 @@ import { fetchMovieDetails } from '../../services/movies-api'
 import Cast from '../Cast';
 import Reviews from '../Reviews';
 
+import { GoBackButton } from './MovieDetailsPage.styled.jsx'
+
 
 export default function MovieDetailsPage() {
     const { url, path } = useRouteMatch();
@@ -75,7 +77,7 @@ export default function MovieDetailsPage() {
       
         return (
             <div>
-                <button onClick={handleGoBack}>Go back</button>
+                <GoBackButton onClick={handleGoBack}>Go back</GoBackButton>
                 <h2>{movie.title}</h2>
                 <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.name} />
                 <p>User score: {movie.vote_average}</p>
