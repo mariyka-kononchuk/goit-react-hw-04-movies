@@ -14,7 +14,7 @@ import { fetchMovieDetails } from '../../services/movies-api'
 import Cast from '../Cast';
 import Reviews from '../Reviews';
 
-import { GoBackButton } from './MovieDetailsPage.styled.jsx'
+import { GoBackButton, MovieName, Score, OverviewTitle, Overview, GenresTitle, Genres, GenresItem, Image, DetailsWrapper, InfoWrapper, InfoTitle, StyledLink } from './MovieDetailsPage.styled.jsx'
 
 
 export default function MovieDetailsPage() {
@@ -56,7 +56,7 @@ export default function MovieDetailsPage() {
     useEffect(() => {
         fetchMovieDetails( movieId )
             .then((data) => {
-                console.log(data.title)
+                console.log(data)
                 setMovie(data)
                 setStatus('resolved');
             }
@@ -66,7 +66,17 @@ export default function MovieDetailsPage() {
             console.log("error");
       });
         
-    }, [ movieId ]);
+    }, [movieId]);
+    
+    const releaseYear = () => {
+        const releaseFullDate = new Date(movie.release_date);
+        return releaseFullDate.getFullYear();
+    }
+    
+    const userScore = () => {
+        const userScorePercentage = movie.vote_average * 10;
+        return userScorePercentage;
+    }
 
     if (status === 'idle') {
         return (<div></div>)
@@ -78,31 +88,38 @@ export default function MovieDetailsPage() {
         return (
             <div>
                 <GoBackButton onClick={handleGoBack}>Go back</GoBackButton>
-                <h2>{movie.title}</h2>
-                <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.name} />
-                <p>User score: {movie.vote_average}</p>
-                <h3>Overview</h3>
-                <p>{movie.overview}</p>
-                <h3>Genres</h3>
-                 <ul>
-                    {movie.genres.map(genre => (
-                        <li key={genre.id}>
-                            {genre.name}
-                        </li>
-                    ))}
-                </ul>
+                
+                <DetailsWrapper>
+                    <Image src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.name} />
+                    <div>
+                        <MovieName>{movie.title} ({releaseYear()})</MovieName>
+                        <Score>User score: {userScore()}%</Score>
+                        <OverviewTitle>Overview</OverviewTitle>
+                        <Overview>{movie.overview}</Overview>
+                        <GenresTitle>Genres</GenresTitle>
+                        <Genres>
+                            {movie.genres.map(genre => (
+                                <GenresItem key={genre.id}>
+                                    {genre.name}
+                                </GenresItem>
+                            ))}
+                        </Genres>
+                    </div>
+                </DetailsWrapper>
 
-                <h3>Additional information</h3>
+                <InfoWrapper>
+                    <InfoTitle>Additional information</InfoTitle>
 
-                <NavLink to={{  ...location,
+                    <StyledLink to={{  ...location,
                                 pathname: `${url}/cast`
                                 
                                 }}>
-                                    Cast</NavLink>
-                <NavLink to={{  ...location,
+                                    Cast</StyledLink>
+                    <StyledLink to={{  ...location,
                                 pathname: `${url}/reviews`
                                 
-                                }}>Reviews</NavLink>
+                                }}>Reviews</StyledLink>
+                </InfoWrapper>
                      
                 <Route path={`${path}/cast`} exact>
                     <Cast />
